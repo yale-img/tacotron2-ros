@@ -8,7 +8,8 @@ import tacotron2_ros.msg
 class Tacotron2TTSActionServer(object):
     # create messages that are used to publish feedback/result
 
-    def __init__(self):
+    def __init__(self, name):
+        self._action_name = name
         self.tacotron = Tacotron2()
         self.feedback = tacotron2_ros.msg.TTSFeedback()
         self.result = tacotron2_ros.msg.TTSResult()
