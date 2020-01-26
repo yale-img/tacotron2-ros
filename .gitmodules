@@ -1,6 +1,6 @@
 [submodule "tacotron2_ros/modules/tacotron2"]
 	path = tacotron2_ros/modules/tacotron2
-	url = git@github.com:nathantsoi/tacotron2.git
+	url = https://github.com/yale-img/tacotron2.git
 [submodule "tacotron2_ros/modules/apex"]
 	path = tacotron2_ros/modules/apex
 	url = https://github.com/NVIDIA/apex.git
