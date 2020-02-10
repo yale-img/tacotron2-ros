@@ -29,6 +29,7 @@ popd
 virtualenv -p $(which python3) .venv
 source .venv/bin/activate
 pip install torch torchvision \
+            soundfile \
             numpy scipy matplotlib \
             librosa==0.6.0 \
             tensorflow==1.15 tensorboardX \
@@ -51,14 +52,30 @@ popd
 
 ## Usage
 
+### Topic mode (async)
+
 ```
-rosrun tacotron2_ros tacotron2_node.py
+rosrun --prefix "$(rospack find tacotron2_ros)/../.venv/bin/python" tacotron2_ros tacotron2_node.py
 ```
 
 Then publish the text of the message to the topic: `/tacotron2/tts`
 
 ```
 rostopic pub /tacotron2/tts std_msgs/String "Hello human. I am a robot."
+```
+
+Note: strings that are too short generate sound files with long echos and reverberations
+
+### Action mode (sync)
+
+```
+rosrun --prefix "$(rospack find tacotron2_ros)/../.venv/bin/python" tacotron2_ros tacotron2_tts_action_server.py
+```
+
+Then publish the text of the message to the topic: `/tacotron2/tts`
+
+```
+rostopic pub /tacotron2_tts/goal String/Message "Hello human."
 ```
 
 Note: strings that are too short generate sound files with long echos and reverberations

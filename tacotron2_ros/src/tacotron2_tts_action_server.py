@@ -10,7 +10,7 @@ class Tacotron2TTSActionServer(object):
 
     def __init__(self, name):
         self._action_name = name
-        self.tacotron = Tacotron2()
+        self.tacotron2 = Tacotron2()
         self.feedback = tacotron2_ros.msg.TTSFeedback()
         self.result = tacotron2_ros.msg.TTSResult()
         self.server = actionlib.SimpleActionServer(self._action_name, tacotron2_ros.msg.TTSAction, execute_cb=self.execute_cb, auto_start=False)
