@@ -12,32 +12,41 @@ git submodule init; git submodule update
 popd
 ```
 
-- Install cuda 10.1
+- Install cuda 11.1
 
 ```
-pushd
-wget https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.39_linux.run
-chmod +x cuda_10.1.105_418.39_linux.run
-sudo ./cuda_10.1.105_418.39_linux.run
-# install the toolkit only
-popd
+installation instructions for CUDA 11.1
 ```
 
-- Make a virtual env named `.venv` after you `cd` into the project directory and activate the virtual environment. Install python requirements:
+- Tensorflow v1.15 requires Python 3.6 or lower, which can be installed using [pyenv](https://github.com/pyenv/pyenv). After following the installation instructions for pyenv, run:
 
 ```
-virtualenv -p $(which python3) .venv
+pyenv install 3.6
+```
+
+- Pipenv provides an easy way to manage a virtual environment with a different version of Python than system. Note that Pipenv does not provide an automatic way to find links from an HTML file, so we use `pip -f` instead.
+
+```
+pip install --user pipenv
+export PIPENV_VENV_IN_PROJECT="true"
+pipenv --python 3.6
+```
+
+- Install python requirements:
+
+```
 source .venv/bin/activate
-pip install torch torchvision \
-            soundfile \
+pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+pip install soundfile \
             numpy scipy matplotlib \
+            numba==0.48.0 \
             librosa==0.6.0 \
             tensorflow==1.15 tensorboardX \
             inflect==0.2.5 Unidecode==1.0.22 pyyaml \
             rospkg simpleaudio
 pushd tacotron2_ros/modules/apex
-export PATH=/usr/local/cuda-10.1/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:$LD_LIBRARY_PATH
+export PATH=/usr/local/cuda-11.1/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64:$LD_LIBRARY_PATH
 pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 popd
 ```
