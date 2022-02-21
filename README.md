@@ -81,11 +81,13 @@ Note: strings that are too short generate sound files with long echos and reverb
 rosrun --prefix "$(rospack find tacotron2_ros)/../.venv/bin/python" tacotron2_ros tacotron2_tts_action_server.py
 ```
 
-Then publish the text of the message to the topic: `/tacotron2/tts`
+Then publish the text of the message to the topic: `/tacotron2/tts/goal`
 
 ```
-rostopic pub /tacotron2_tts/goal String/Message "Hello human."
+rostopic pub /tacotron2_tts/goal tacotron2_ros/TTSActionGoal "header: ..."
 ```
+
+Note that constructing the entire TTSActionGoal message by hand is tedious. To simplify, rely on tab completion, by pressing TAB after typing ```tacotron2_ros/TTSActionGoal``` and just substituting the desired string in the field ```Message```.
 
 Note: strings that are too short generate sound files with long echos and reverberations
 
