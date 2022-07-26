@@ -21,8 +21,10 @@ installation instructions for CUDA 11.1
 - Tensorflow v1.15 requires Python 3.6 or lower, which can be installed using [pyenv](https://github.com/pyenv/pyenv). After following the installation instructions for pyenv, run:
 
 ```
-pyenv install 3.6
+pyenv install 3.6.x
 ```
+
+Tacotron2 is known to work with Python 3.6.15, but the latest available release should also work and should be installed.
 
 - Pipenv provides an easy way to manage a virtual environment with a different version of Python than system. Note that Pipenv does not provide an automatic way to find links from an HTML file, so we use `pip -f` instead.
 
