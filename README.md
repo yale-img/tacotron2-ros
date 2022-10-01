@@ -12,32 +12,43 @@ git submodule init; git submodule update
 popd
 ```
 
-- Install cuda 10.1
+- Install cuda 11.1
 
 ```
-pushd
-wget https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.39_linux.run
-chmod +x cuda_10.1.105_418.39_linux.run
-sudo ./cuda_10.1.105_418.39_linux.run
-# install the toolkit only
-popd
+installation instructions for CUDA 11.1
 ```
 
-- Make a virtual env named `.venv` after you `cd` into the project directory and activate the virtual environment. Install python requirements:
+- Tensorflow v1.15 requires Python 3.6 or lower, which can be installed using [pyenv](https://github.com/pyenv/pyenv). After following the installation instructions for pyenv, run:
 
 ```
-virtualenv -p $(which python3) .venv
+pyenv install 3.6.x
+```
+
+Tacotron2 is known to work with Python 3.6.15, but the latest available release should also work and should be installed.
+
+- Pipenv provides an easy way to manage a virtual environment with a different version of Python than system. Note that Pipenv does not provide an automatic way to find links from an HTML file, so we use `pip -f` instead.
+
+```
+pip install --user pipenv
+export PIPENV_VENV_IN_PROJECT="true"
+pipenv --python 3.6
+```
+
+- Install python requirements:
+
+```
 source .venv/bin/activate
-pip install torch torchvision \
-            soundfile \
+pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+pip install soundfile \
             numpy scipy matplotlib \
+            numba==0.48.0 \
             librosa==0.6.0 \
             tensorflow==1.15 tensorboardX \
             inflect==0.2.5 Unidecode==1.0.22 pyyaml \
             rospkg simpleaudio
 pushd tacotron2_ros/modules/apex
-export PATH=/usr/local/cuda-10.1/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:$LD_LIBRARY_PATH
+export PATH=/usr/local/cuda-11.1/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64:$LD_LIBRARY_PATH
 pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 popd
 ```
@@ -61,7 +72,7 @@ rosrun --prefix "$(rospack find tacotron2_ros)/../.venv/bin/python" tacotron2_ro
 Then publish the text of the message to the topic: `/tacotron2/tts`
 
 ```
-rostopic pub /tacotron2/tts std_msgs/String "Hello human. I am a robot."
+rostopic pub -1 /tacotron2/tts std_msgs/String "Hello human. I am a robot."
 ```
 
 Note: strings that are too short generate sound files with long echos and reverberations
@@ -72,10 +83,10 @@ Note: strings that are too short generate sound files with long echos and reverb
 rosrun --prefix "$(rospack find tacotron2_ros)/../.venv/bin/python" tacotron2_ros tacotron2_tts_action_server.py
 ```
 
-Then publish the text of the message to the topic: `/tacotron2/tts`
+Then publish the text of the message to the topic: `/tacotron2_tts/goal`
 
 ```
-rostopic pub /tacotron2_tts/goal String/Message "Hello human."
+rostopic pub -1 /tacotron2_tts/goal tacotron2_ros/TTSActionGoal "goal: {Message: 'Hello human. I am a robot.}"
 ```
 
 Note: strings that are too short generate sound files with long echos and reverberations
