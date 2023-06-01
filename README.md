@@ -51,24 +51,24 @@ A ros wrapper for https://github.com/NVIDIA/tacotron2
 
 - Install python requirements:
 
-```console
-source .venv/bin/activate
-pip install --upgrade pip
-pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
-pip install soundfile \
-            numpy scipy matplotlib \
-            numba==0.48.0 \
-            librosa==0.6.0 \
-            tensorflow==1.15 tensorboardX \
-            inflect==0.2.5 Unidecode==1.0.22 pyyaml \
-            rospkg simpleaudio
-pushd tacotron2_ros/modules/apex
-export PATH=/usr/local/cuda-11.1/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64:$LD_LIBRARY_PATH
-pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
-popd
-deactivate
-```
+  ```console
+  $ source .venv/bin/activate
+  $ pip install --upgrade pip
+  $ pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+  $ pip install soundfile \
+                numpy scipy matplotlib \
+                numba==0.48.0 \
+                librosa==0.6.0 \
+                tensorflow==1.15 tensorboardX \
+                inflect==0.2.5 Unidecode==1.0.22 pyyaml \
+                rospkg simpleaudio
+  $ pushd tacotron2_ros/modules/apex
+  $ export PATH=/usr/local/cuda-11.1/bin:$PATH
+  $ export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64:$LD_LIBRARY_PATH
+  $ pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+  $ popd
+  $ deactivate
+  ```
 
 - Download pretrained models
 
