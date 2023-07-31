@@ -84,7 +84,7 @@ A ros wrapper for https://github.com/NVIDIA/tacotron2
 ### Topic mode (async)
 
 ```console
-$ rosrun --prefix "$(rospack find tacotron2_ros)/../.venv/bin/python" tacotron2_ros tacotron2_node.py
+$ roslaunch tacotron2_ros tacotron2.launch action_server:=false
 ```
 
 Then publish the text of the message to the topic: `/tacotron2/tts`
@@ -99,7 +99,7 @@ Note: strings that are too short generate sound files with long echos and reverb
 ### Action mode (sync)
 
 ```console
-$ rosrun --prefix "$(rospack find tacotron2_ros)/../.venv/bin/python" tacotron2_ros tacotron2_tts_action_server.py
+$ roslaunch tacotron2_ros tacotron2.launch action_server:=true
 ```
 
 Then publish the text of the message to the topic: `/tacotron2_tts/goal`

@@ -18,7 +18,12 @@ class Tacotron2TTSActionServer(object):
 
     def execute_cb(self, goal):
         wav_obj = self.tacotron2.to_wav(goal.Message)
-        wav_obj.play().wait_done()
+        play_obj = wav_obj.play()
+        while play_obj.is_playing():
+            if self.server.is_preempt_requested():
+                play_obj.stop()
+                self.server.set_preempted()
+                return
         self.result.Message = "done"
         self.server.set_succeeded(self.result)
 

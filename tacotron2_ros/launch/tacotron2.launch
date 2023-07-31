@@ -1,0 +1,11 @@
+<launch>
+  <arg name="action_server" default="true"/>
+
+  <env name="DISPLAY" value="$(optenv DISPLAY :0)"/>
+
+  <!-- action server -->
+  <node pkg="tacotron2_ros" name="tacotron2_tts" launch-prefix="$(find tacotron2_ros)/../.venv/bin/python" type="tacotron2_tts_action_server.py" if="$(arg action_server)"/>
+
+  <!-- topic mode -->
+  <node pkg="tacotron2_ros" name="tacotron2_tts" launch-prefix="$(find tacotron2_ros)/../.venv/bin/python" type="tacotron2_node.py" unless="$(arg action_server)"/>
+</launch>
