@@ -109,3 +109,7 @@ $ rostopic pub -1 /tacotron2_tts/goal tacotron2_ros/TTSActionGoal "goal: {Messag
 ```
 
 Note: strings that are too short generate sound files with long echos and reverberations.
+
+## Remote Usage
+
+An experimental procedure for playing Tacotron2 speech over SSH is documented in [stream_remote.md](./stream_remote.md)
