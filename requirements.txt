@@ -1,0 +1,11 @@
+librosa==0.6.0
+matplotlib
+inflect==0.2.5
+numba==0.48.0
+rospkg
+scipy
+simpleaudio
+soundfile
+tensorflow==1.15
+tensorboardX
+Unidecode==1.0.22

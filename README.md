@@ -8,36 +8,30 @@ A ros wrapper for https://github.com/NVIDIA/tacotron2
 
   ```console
   # cd tacotron2-ros  # this repository
-  $ pushd tacotron2_ros/modules/tacotron2
-  $ git submodule init; git submodule update
-  $ popd
+  $ git submodule update --init --recursive
   ```
 
-- Install cuda 11.1
+- If you are training or finetuning a TacoTron2 model, install cuda 11.1
 
   ```
   installation instructions for CUDA 11.1
   ```
 
+- [gdown](https://github.com/wkentaro/gdown) is a Python package and command-line tool for easily fetching files from Google Drive.
+  It is strongly recommended to install gdown with [pipx](https://pipx.pypa.io/latest/):
+
+  ```console
+  $ pip install --user pipx
+  $ pipx ensurepath
+  $ pipx install gdown
+  ```
+
 - Tensorflow v1.15 requires Python 3.6 or lower, which can be installed using [pyenv](https://github.com/pyenv/pyenv).
-  When installing **pyenv**, follow the instructions for [Automatic installer](https://github.com/pyenv/pyenv#automatic-installer), then follow the **bash** instructions for [shell environment setup](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv).
+  When installing **pyenv**, follow the instructions for [Automatic installer](https://github.com/pyenv/pyenv#automatic-installer), then follow the **bash** instructions for [shell environmenhttps://pipx.pypa.io/latest/t setup](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv).
   After following the installation instructions for pyenv, run:
 
   ```console
   $ pyenv install 3.6.15
-  ```
-
-  Tacotron2 is known to work with Python 3.6.15, but the latest available release should also work and should be installed.
-
-- [Pipenv](https://pipenv.pypa.io) provides an easy way to manage a virtual environment with a different version of Python than system.
-  Note that pipenv does not provide an automatic way to find links from an HTML file, so we use `pip -f` instead.
-
-  ```console
-  $ pip install --user pipenv
-  $ export PIPENV_VENV_IN_PROJECT="true"
-  $ pipenv --python 3.6
-
-  # if the above command FAILS, see the next list item for a workaround
   ```
 
 - As of release `2022.4.8`, pipenv no longer supports creating virtual environments with Python `3.6`.
@@ -54,14 +48,15 @@ A ros wrapper for https://github.com/NVIDIA/tacotron2
   ```console
   $ source .venv/bin/activate
   $ pip install --upgrade pip
-  $ pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
-  $ pip install soundfile \
-                numpy scipy matplotlib \
-                numba==0.48.0 \
-                librosa==0.6.0 \
-                tensorflow==1.15 tensorboardX \
-                inflect==0.2.5 Unidecode==1.0.22 pyyaml \
-                rospkg simpleaudio
+  $ pip install -r torch-requirements.txt
+  $ pip install -r requirements.txt
+  $ deactivate
+  ```
+
+- If you are training or finetuning a TacoTron2 model, also compile Apex:
+
+  ```console
+  $ source .venv/bin/activate
   $ pushd tacotron2_ros/modules/apex
   $ export PATH=/usr/local/cuda-11.1/bin:$PATH
   $ export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64:$LD_LIBRARY_PATH
@@ -72,11 +67,10 @@ A ros wrapper for https://github.com/NVIDIA/tacotron2
 
 - Download pretrained models
 
-  - Download our published Tacotron 2 model: [tacotron2_statedict.pt](https://drive.google.com/file/d/1c5ZTuT7J08wLUoVZ2KkUs_VdZuJ86ZqA/view)
-
-  - Download the WaveGlow published model: [waveglow_256channels_ljs_v2.pt](https://drive.google.com/file/d/1WsibBTsuRg_SF2Z6L6NFRTT-NjEy1oTx/view)
-
-  - Copy both into `tacotron2_ros/models/`
+  ```console
+  $ gdown -O tacotron2_ros/models/ 1c5ZTuT7J08wLUoVZ2KkUs_VdZuJ86ZqA
+  $ gdown -O tacotron2_ros/models/ 1WsibBTsuRg_SF2Z6L6NFRTT-NjEy1oTx
+  ```
 
 
 ## Usage
