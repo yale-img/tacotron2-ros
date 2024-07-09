@@ -27,7 +27,7 @@ A ros wrapper for https://github.com/NVIDIA/tacotron2
   ```
 
 - Tensorflow v1.15 requires Python 3.6 or lower, which can be installed using [pyenv](https://github.com/pyenv/pyenv).
-  When installing **pyenv**, follow the instructions for [Automatic installer](https://github.com/pyenv/pyenv#automatic-installer), then follow the **bash** instructions for [shell environmenhttps://pipx.pypa.io/latest/t setup](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv).
+  When installing **pyenv**, follow the instructions for [Automatic installer](https://github.com/pyenv/pyenv#automatic-installer), then follow the **bash** instructions for [shell environment setup](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv).
   After following the installation instructions for pyenv, run:
 
   ```console
