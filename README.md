@@ -68,8 +68,8 @@ A ros wrapper for https://github.com/NVIDIA/tacotron2
 - Download pretrained models
 
   ```console
-  $ gdown -O tacotron2_ros/models/ 1c5ZTuT7J08wLUoVZ2KkUs_VdZuJ86ZqA
-  $ gdown -O tacotron2_ros/models/ 1WsibBTsuRg_SF2Z6L6NFRTT-NjEy1oTx
+  $ gdown -O tacotron2_ros/models/ 1y5Nd-e5SGyHTJTvr2CNwSH481yFJ8QGZ
+  $ gdown -O tacotron2_ros/models/ 1DnbjPf5yJCTSEdXDT_n1_RyK69V-qol_
   ```
 
 
